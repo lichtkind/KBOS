@@ -1,2 +1,2 @@
 # KBOS
-IO OO and data life cycle system
+inside out OO, type and data life cycle system
