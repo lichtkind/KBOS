@@ -7,9 +7,9 @@ BEGIN { unshift @INC, 'lib', '../lib', '.', 't'}
 package NameSpaceTester; 
 use Test::More tests => 1;
 
-use Kephra::Base::Data::Type::Basic;       my $bclass  = 'Kephra::Base::Data::Type::Basic';
-use Kephra::Base::Data::Type::Parametric;  my $pclass  = 'Kephra::Base::Data::Type::Parametric';
-                                           my $class  = 'Kephra::Base::Data::Type::Factory';
+use KBOS::Data::Type::Basic;       my $bclass  = 'KBOS::Data::Type::Basic';
+use KBOS::Data::Type::Parametric;  my $pclass  = 'KBOS::Data::Type::Parametric';
+                                           my $class  = 'KBOS::Data::Type::Factory';
 
 my $erefdef = [];
 my $crefdef = [1];
@@ -79,7 +79,7 @@ eval "use $class;";
 is( $@, '',                                                               'loaded factory package');
 
 
-my $space = Kephra::Base::Data::Type::Set->new();
+my $space = KBOS::Data::Type::Set->new();
 is( ref $space, $sclass,                                                  'could create a closable type namespace object');
 is( $space->list_type_names('basic'),                      undef,         'no basic types can be listed');
 is( $space->list_type_names('param'),                      undef,         'no parametric types can be listed');
@@ -101,7 +101,7 @@ like($space->forbid_symbols(1),                      qr/can not/,         'can n
 like($space->allow_symbols(2),                       qr/can not/,         'can not remove from forbidden symbols at closed namespace');
 
 
-my $ospace = Kephra::Base::Data::Type::Set->new('open');
+my $ospace = KBOS::Data::Type::Set->new('open');
 is( ref $ospace, $sclass,                                                 'could create an unclosable type namespace object');
 is( $ospace->is_open(),                                        1,         'newly made type namespace is open');
 is( $ospace->close(),                                          0,         'could not close namespace');

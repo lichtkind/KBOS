@@ -8,11 +8,11 @@ package Very::Long::Package; sub new {bless {}}
 
 use Test::More tests => 200;
 
-my $btclass = 'Kephra::Base::Data::Type::Basic';
-my $ptclass = 'Kephra::Base::Data::Type::Parametric';
+my $btclass = 'KBOS::Data::Type::Basic';
+my $ptclass = 'KBOS::Data::Type::Parametric';
 
-sub simple_type { Kephra::Base::Data::Type::Basic->new(@_) }
-sub para_type { Kephra::Base::Data::Type::Parametric->new(@_) }
+sub simple_type { KBOS::Data::Type::Basic->new(@_) }
+sub para_type { KBOS::Data::Type::Parametric->new(@_) }
 
 eval "use $ptclass";
 is( $@, '', 'could load the module '.$ptclass);
@@ -85,7 +85,7 @@ is ( ref $state, 'HASH',                       'state of "index" type is a HASH 
 is ( ref $state->{'parameter'}, 'HASH',        'state of "index" type parameter is a HASH ref');
 is ( $state->{'name'},          'index',       '"name" in type "index" state HASH is correct');
 is ( $state->{'parameter'}{'name'}, 'parray',  'parameter "name" in type "index" state is correct');
-my $Ticlone = Kephra::Base::Data::Type::Parametric->restate($state);
+my $Ticlone = KBOS::Data::Type::Parametric->restate($state);
 is ( ref $Ticlone, $ptclass,                   'recreated first prametric type object, type "index" by restate from dumped state');
 is ( $Ticlone->kind, 'param',                  'got attribute "ID" from getter of "index" clone');
 is ( $Ticlone->name, 'index',                  'got attribute "name" from getter of "index" clone');
@@ -183,7 +183,7 @@ is ( ref $state, 'HASH',                       'state of "ref" type is a HASH re
 is ( ref $state->{'parameter'}, 'HASH',        'state of "ref" type parameter is a HASH ref');
 is ( $state->{'name'},          'reference',   '"name" in type "ref" state HASH is correct');
 is ( $state->{'parameter'}{'name'}, 'refname', 'parameter "name" in type "ref" state is correct');
-my $Trefclone = Kephra::Base::Data::Type::Parametric->restate($state);
+my $Trefclone = KBOS::Data::Type::Parametric->restate($state);
 is ( ref $Trefclone, $ptclass,                 'recreated prametric type object, "ref" by restate from dumped state');
 is ( $Trefclone->name, 'reference',            'got attribute "name" from getter of "ref" clone');
 is ( $Trefclone->help, 'reference of given type','got attribute "help" from getter of "ref" clone');

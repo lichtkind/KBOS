@@ -7,7 +7,7 @@ BEGIN { unshift @INC, 'lib', '../lib', '.', 't'}
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! do not edit - line number are part of tests !!!!!!!!!!!!!!!!!!!!
 
-use Kephra::Base::Package qw/:all/;
+use KBOS::Package qw/:all/;
 use TestClass;
 
 is( package_loaded('TestClass'),                1, 'TestClass is loaded package');
@@ -97,5 +97,5 @@ package B;
 sub caller      { C::called( shift ) }
 
 package C;
-sub called      { Kephra::Base::Package::sub_caller( shift) }
+sub called      { KBOS::Package::sub_caller( shift) }
 

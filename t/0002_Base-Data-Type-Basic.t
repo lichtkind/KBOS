@@ -6,9 +6,9 @@ BEGIN { unshift @INC, 'lib', '../lib', '.', 't'}
 
 use Test::More tests => 171;
 
-my $pkg = 'Kephra::Base::Data::Type::Basic';
-sub create_type { Kephra::Base::Data::Type::Basic->new(@_) }
-my $check = \&Kephra::Base::Data::Type::Basic::_check_name;
+my $pkg = 'KBOS::Data::Type::Basic';
+sub create_type { KBOS::Data::Type::Basic->new(@_) }
+my $check = \&KBOS::Data::Type::Basic::_check_name;
 
 eval "use $pkg;";
 is( $@, '',                                     'could load the module '.$pkg);
@@ -58,7 +58,7 @@ is( $Tvalue->check_data($val),
 
 my $state = $Tvalue->state;
 is( ref $state, 'HASH',                  'state dump is hash ref');
-my $Tvclone = Kephra::Base::Data::Type::Basic->restate($state);
+my $Tvclone = KBOS::Data::Type::Basic->restate($state);
 is( ref $Tvclone, $pkg,                  'recreated object for type "value" from serialized state');
 is( $Tvclone->ID, 'value',               'got attribute "ID" from getter');
 is( $Tvclone->ID_equals( $Tvalue->ID),1, 'ID equals to the one of clone');
@@ -109,7 +109,7 @@ ok( $Tbool->check_data(5),            'check method of type "bool" denies with e
 ok( $Tbool->check_data('--'),         'check method of type "bool" denies with error correctly string value --');
 
 
-my $Tbclone = Kephra::Base::Data::Type::Basic->restate( $Tbool->state );
+my $Tbclone = KBOS::Data::Type::Basic->restate( $Tbool->state );
 is( ref $Tbclone, $pkg,              'recreated child type object bool');
 is( $Tbclone->name, 'bool',          'got attribute "name" from getter');
 is( $Tbclone->parents, 1,            'has one parent');

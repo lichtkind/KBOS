@@ -1,7 +1,7 @@
 use v5.20;
 no warnings qw/experimental redefine/;
 
-package Kephra::Base::Package;
+package KBOS::Package;
 our $VERSION = 1.1;
 use Exporter 'import';
 our @EXPORT_OK = qw/package_loaded count_sub has_sub has_hash has_array get_sub get_hash get_array set_sub set_hash set_array call_sub sub_caller/;
