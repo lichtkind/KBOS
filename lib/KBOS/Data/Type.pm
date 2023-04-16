@@ -3,25 +3,25 @@ use warnings;
 
 # organize type related symbols, mostly easy access to stdandard types
 
-package Kephra::Base::Data::Type;
+package KBOS::Data::Type;
 our $VERSION = 1.6;
-use Kephra::Base::Data::Type::Checker;
+use KBOS::Data::Type::Checker;
 
 use Exporter 'import';
 our @EXPORT_OK = qw/create_type check_type guess_type is_type_known resolve_type_shortcut/;
 our %EXPORT_TAGS = (all => [@EXPORT_OK]);
 
 ################################################################################
-my $standard_types = Kephra::Base::Data::Type::Standard::set();
-my $shared_types = Kephra::Base::Data::Type::Set->new('open'); 
-my $set_class = 'Kephra::Base::Data::Type::Set';
+my $standard_types = KBOS::Data::Type::Standard::set();
+my $shared_types = KBOS::Data::Type::Set->new('open'); 
+my $set_class = 'KBOS::Data::Type::Set';
 
 sub standard    { $standard_types }
 sub shared      { $shared_types }
-sub class_names { Kephra::Base::Data::Type::Factory::class_names }
+sub class_names { KBOS::Data::Type::Factory::class_names }
 ################################################################################
 sub state       { $shared_types->state }
-sub restate     { $shared_types = Kephra::Base::Data::Type::Store->restate($_[0]) }
+sub restate     { $shared_types = KBOS::Data::Type::Store->restate($_[0]) }
 ################################################################################
 sub is_known      { &is_type_known }
 sub is_type_known { # ~type|[~type ~param] ?shared @.type_store  --> ?
@@ -49,7 +49,7 @@ sub create      { &create_type }
 sub create_type {
     my ($type_def, $shared, @store) = @_;
     push @store, $shared_types if $shared;
-    Kephra::Base::Data::Type::Util::create_type($_[0], $standard_types, @store);
+    KBOS::Data::Type::Util::create_type($_[0], $standard_types, @store);
 }
 
 sub check      { &check_type }

@@ -9,10 +9,10 @@ no warnings 'experimental::smartmatch';
 #                code =>'return "value $value is out of range" if $value >= @$param', default => 0,
 #           parameter =>{name => 'ARRAY', help => 'array reference', code => 'ref $value eq "ARRAY"', default => []}    }   # type is required
 
-package Kephra::Base::Data::Type::Parametric;
+package KBOS::Data::Type::Parametric;
 our $VERSION = 1.8;
 use Scalar::Util qw/blessed looks_like_number/;
-use Kephra::Base::Data::Type::Basic;         my $btype = 'Kephra::Base::Data::Type::Basic';
+use KBOS::Data::Type::Basic;         my $btype = 'KBOS::Data::Type::Basic';
 
 #### construct $ destruct ######################################################
 sub _unhash_arg_ {
@@ -23,7 +23,7 @@ sub _unhash_arg_ {
 sub new {   # ~name  ~help  %parameter|.parameter  ~code  .parent - $default    --> .ptype | ~errormsg 
     my $pkg = shift;
     my ($name, $help, $code, $parameter, $parent, $default) = _unhash_arg_(@_);
-    my $name_error = Kephra::Base::Data::Type::Basic::_check_name($name);
+    my $name_error = KBOS::Data::Type::Basic::_check_name($name);
     return $name_error if $name_error;
     return "need the arguments 'name' (str), 'help' (str), 'parameter' ( basic type object), 'code' (str) ".
         "and maybe 'parent' ($btype) to create parametric type object" unless defined $code and $code and $help ;
@@ -37,7 +37,7 @@ sub new {   # ~name  ~help  %parameter|.parameter  ~code  .parent - $default    
             $code = $parent->{'code'}.';'.$code;
             $parameter //= $parent->parameter;
         } else {
-            $code = Kephra::Base::Data::Type::Basic::_asm_($name, $parent->source).';'.$code;
+            $code = KBOS::Data::Type::Basic::_asm_($name, $parent->source).';'.$code;
         }
         push @$all_parents, $parent->ID, $parent->parents;
         $default //= $parent->default_value;
@@ -62,7 +62,7 @@ sub new {   # ~name  ~help  %parameter|.parameter  ~code  .parent - $default    
 
 sub restate {                                        # %state                -->  .ptype | ~errormsg
     my ($pkg, $state) = @_;
-    $state->{'parameter'} = Kephra::Base::Data::Type::Basic->restate( $state->{'parameter'} );
+    $state->{'parameter'} = KBOS::Data::Type::Basic->restate( $state->{'parameter'} );
     $state->{'coderef'} = eval _compile_( $state->{'name'}, $state->{'checks'}, $state->{'code'}, $state->{'parameter'});
     $state->{'trustcoderef'} = eval _compile_with_safe_param_( $state->{'name'}, $state->{'checks'}, $state->{'code'});
     bless $state;
@@ -75,7 +75,7 @@ sub state {                                          # _                     -->
 sub _compile_ {
     my ($name, $check, $code, $parameter) = @_;
     'sub { my ($param, $value) = @_; no warnings "all";'
-    . Kephra::Base::Data::Type::Basic::_asm_("$name parameter ".$parameter->name, $parameter->source)
+    . KBOS::Data::Type::Basic::_asm_("$name parameter ".$parameter->name, $parameter->source)
     . '($value, $param)=($param, $value);' . $code . ";return ''}"
 }
 sub _compile_with_safe_param_ {

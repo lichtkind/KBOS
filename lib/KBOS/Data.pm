@@ -3,13 +3,13 @@ use warnings;
 
 # root of none OO data handling
 
-package Kephra::Base::Data;
+package KBOS::Data;
 our $VERSION = 0.2;
 use Scalar::Util qw/blessed/;
-use Kephra::Base::Data::Type qw/:all/;
+use KBOS::Data::Type qw/:all/;
 use Exporter 'import';
-our @EXPORT_OK = ('clone_data', 'date_time', @Kephra::Base::Data::Type::EXPORT_OK);
-our %EXPORT_TAGS = (all => [@EXPORT_OK], type => [@Kephra::Base::Data::Type::EXPORT_OK]);
+our @EXPORT_OK = ('clone_data', 'date_time', @KBOS::Data::Type::EXPORT_OK);
+our %EXPORT_TAGS = (all => [@EXPORT_OK], type => [@KBOS::Data::Type::EXPORT_OK]);
 
 my %copied_reftype   = ('' => 1, Regexp => 1, CODE => 1, FORMAT => 1, IO => 1, GLOB => 1, LVALUE => 1);
 
