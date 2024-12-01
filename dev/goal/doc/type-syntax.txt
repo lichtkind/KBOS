@@ -1,0 +1,31 @@
+
+
+required arguments -- optional args --> required return values -- optional return
+
+.
+_    ref of current object class
+|    undef or ...
+<
+>
+[]
+()
+"
+!
+*    slurpy list
+'
+     undef
+?    boolean
+~    string
++    numeric
+$    scalar ref
+@    array ref
+%    hash ref
+§    KBOS class ref
+&    code ref
+:
+/
+\
+^
+
+int
+positive int
