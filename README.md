@@ -1,2 +1,7 @@
 # KBOS
-inside out OO, type and data life cycle system
+
+- inside out 3 layered OO,
+- complex type system
+- data life cycle system (serialisation)
+
+for Perl 5
