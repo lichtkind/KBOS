@@ -2,30 +2,33 @@
 
 required arguments -- optional args --> required return values -- optional return
 
-.
-_    ref of current object class
-|    undef or ...
-<
->
-[]
-()
-"
-!
-*    slurpy list
-'
      undef
-?    boolean
+?    boolean            (0|1)
+!    error message
 ~    string
+     regex
 +    numeric
-$    scalar ref
+#    integer          ((Z I))
+^    positive integer ((N P))
+
+$    scalar ref (of type on right)
 @    array ref
 %    hash ref
-§    KBOS class ref
 &    code ref
+§    KBOS class ref
+
+.    same as return type?
+_    ref of current object class
+
+|    or ...
+*    slurpy list
+<>
+"
+'
 :
 /
 \
-^
 
-int
-positive int
+[]   range
+()
+{}
